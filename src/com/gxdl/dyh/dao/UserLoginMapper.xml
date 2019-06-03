@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxdl.dyh.dao.UserLoginMapper">
+	<!-- 查询是否存在用户 -->
+	<select id="getUserNameOnly" parameterType="java.lang.String" resultType="com.gxdl.dyh.po.UserInfo">
+		select userid from ps_userinfo where username=#{username};
+	</select>
+		<!-- 用户注册添加用户的信息 -->
+	<insert id="addUserMassage" parameterType="com.gxdl.dyh.po.UserInfo" useGeneratedKeys="true" keyProperty="userInfo.userid">
+		insert into ps_userinfo (userid,username,passwords,salt,user_token,accounts,hand_pic,email,
+		age,mobile,identity,birthday,nationality,province,city,address,create_time,last_login_time,
+		current_login_flag,remark) values (null,#{userInfo.username},MD5(#{userInfo.passwords}),#{userInfo.salt},
+		#{userInfo.userToken},#{userInfo.accounts},
+		#{userInfo.handPic},#{userInfo.email},#{userInfo.age},#{userInfo.mobile},#{userInfo.identity},#{userInfo.birthday},#{userInfo.nationality},#{userInfo.province},
+		#{userInfo.city},#{userInfo.address},#{userInfo.createTime},#{userInfo.lastLoginTime},#{userInfo.currentLoginFlag},#{userInfo.remark});
+	</insert>
+	
+	<resultMap type="com.gxdl.dyh.po.UserInfo" id="UserInfo">
+		<result property="userid" column="userid"/>
+		<result property="username" column="username"/>
+		<result property="passwords" column="passwords"/>
+		<result property="salt" column="salt"/>
+		<result property="userToken" column="user_token"/>
+		<result property="accounts" column="accounts"/>
+		<result property="handPic" column="hand_pic"/>
+		<result property="email" column="email"/>
+		<result property="age" column="age"/>
+		<result property="mobile" column="mobile"/>
+		<result property="identity" column="identity"/>
+		<result property="birthday" column="birthday"/>
+		<result property="nationality" column="nationality"/>
+		<result property="province" column="province"/>
+		<result property="city" column="city"/>
+		<result property="address" column="address"/>
+		<result property="createTime" column="create_time"/>
+		<result property="lastLoginTime" column="last_login_time"/>
+		<result property="currentLoginFlag" column="current_login_flag"/>
+		<result property="remark" column="remark"/>
+	</resultMap>
+	
+	<!-- 获取某一个用户的加密时的盐 -->
+	<select id="getUserInfoSalt" resultType="java.lang.String" parameterType="java.lang.String">
+		select salt from ps_userinfo where username=#{username};
+	</select>
+	
+	<!-- 校验用户的登录时的用户名和密码 -->
+	<select id="getUserMassageFlag" resultMap="UserInfo" parameterType="java.lang.String">
+		select user_token from ps_userinfo where username=#{username} and passwords=MD5(#{password});
+	</select>
+	
+	<!-- userInfo对象里面仅仅设置登录的时间和登录的标志，其他的属性一律为空 -->
+	<update id="addUserLoginSuccessData" parameterType="com.gxdl.dyh.po.UserInfo">
+		update ps_userinfo set last_login_time=#{userInfo.lastLoginTime},
+			current_login_flag=#{userInfo.currentLoginFlag} where user_token=#{userInfo.userToken}
+	</update>
+	
+	<!-- 登录成功以后获取用户姓名 -->
+	<select id="getUserName" resultMap="UserInfo" parameterType="java.lang.String">
+		select username from ps_userinfo where user_token=#{userToken}
+	</select>
+	
+		<!-- 当用户注册完成时，将用户的电量和账户余额进行设置做初始化操作 -->
+	<insert id="insertUserPowerAndMoneyInit" parameterType="com.gxdl.dyh.po.UserInfo">
+		insert into ps_use_conumer (id,userId,accounts,electricitynumber,surplus_money,balance_warning,power_warning) 
+		values (null,#{userinfo.userid},#{userinfo.accounts},'0','0','20','30');
+	</insert>
+</mapper>

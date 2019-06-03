@@ -1,0 +1,14 @@
+.list_div{
+	margin-left: 15%;
+	margin-top: 15%;
+}
+li{
+	letter-spacing: 3px;
+	margin: 12px;
+}
+a{
+	text-decoration:none;
+}
+body{
+	background:#E0EEEE;
+}

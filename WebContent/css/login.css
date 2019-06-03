@@ -1,0 +1,74 @@
+.bg_style{
+	background-image: url(/DemoPowerSystem/images/bg.png);
+	margin-left: -3%;
+	margin-top: 2%;
+	width: 110%;
+	height: 600px;
+}
+.hrad_style{
+	text-align: center;
+	font-size: 50px;
+}
+.logo_style{
+	width: 200px;
+	height: 200px;
+	margin-left: 0px;
+	margin-top: 0px;
+}
+.font_div{
+	margin-left: 150px;
+	margin-top: -185px;
+}
+.logo_hrad_style{
+	width: 100px;
+	height: 100px;
+}
+
+.table_div{
+	padding-left: 51%; 
+	padding-top: 8%;
+}
+
+.table_main{
+	border: solid 1.5px;
+	border-color: whitesmoke;
+	width: 400px;
+	height: 300px;
+	border-radius: 30px;
+	border-collapse:separate; 
+	border-spacing:10px;
+}
+.input_class{
+	border-radius: 5px;
+	border: 0.5px solid;
+	border-color: white;
+	width: 180px;
+	height: 30px;
+	text-align: left;
+	
+}
+.tishi_class{
+	font-size: 23px;
+	font-family: "幼圆";
+	color: antiquewhite;
+	text-align: ;
+}
+.plase_class{
+	text-align: center;
+}
+button{
+	font-family: "幼圆";
+	font-size: 20px;
+	color: white;
+	background-color: coral;
+	text-align: center;
+	height: 40px;
+	width: 310px;
+	border-radius: 8px;
+	border: 0.5px solid;
+}
+td{
+	padding-left: 25px;
+	height: 40px;
+}
+

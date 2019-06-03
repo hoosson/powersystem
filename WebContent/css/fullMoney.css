@@ -1,0 +1,63 @@
+.full_hard{
+	font-family: "黑体";
+	font-size: 25px;
+	letter-spacing: 3px;
+	margin-left: 22%;
+	margin-top: 1px;
+}
+.condition_div{
+	font-size: 18px;
+	margin-left: 5%;
+}
+.button_class{
+	font-family: "黑体";
+	font-size: 18px;
+	background-color: orange;
+	border: 1.5px solid;
+	width: 180px;
+	height: 35px;
+	border-radius: 10px;
+}
+.table_wai{
+	margin-left: 3%;
+	margin-top: 2%;
+}
+.table_class{
+	width: 1130px;
+	border:1.5px solid;
+	border-collapse:collapse;
+	
+}
+.properclass{
+	text-align: center;
+}
+tr,td{
+	border:1px solid;
+}
+.button_paging{
+	font-family: "黑体";
+	font-size: 8px;
+	background-color: #74D2D9;
+	border: 0.5px solid;
+	width: 60px;
+	height: 20px;
+	border-radius: 7px;
+}
+#datatest{
+	border: 1px solid;
+	border-radius: 6px;
+	height: 20px;
+	font-size: 18px;
+	width: 185px;
+	background-color: antiquewhite;
+	height: 26px;
+}
+#datatest1{
+	border: 1px solid;
+	border-radius: 6px;
+	font-size: 18px;
+	height: 20px;
+	width: 185px;
+	background-color: antiquewhite;
+	height: 26px;
+}

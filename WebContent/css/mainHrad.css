@@ -1,0 +1,39 @@
+.main_hand_font_div{
+	font-family: "幼圆";
+	font-size: 15px;
+	color: whitesmoke;
+	letter-spacing: 6px;
+}
+.head_div{
+	background-color: blueviolet;
+	height:65px;
+	margin-left: -1%;
+	margin-top: -1%;
+	margin-right: -10%;
+}
+.head_div1{
+	height: 200px;
+	width: 2000px;
+	padding-left: 3%;
+	padding-top: 1%;
+	
+}
+.hardpicdiv{
+	height: 40px;
+	width: 40px;
+	margin-left: 58%;
+	margin-top: -1.7%;
+}
+.hardflagdiv{
+	margin-left: 61%;
+	margin-top: -1.5%;
+}
+.userflagdiv{
+	font-size: 20px;
+	color: #EEEEEE;
+	font-family: "宋体";
+}
+img{
+	width: 40px;
+	height: 40px;
+}

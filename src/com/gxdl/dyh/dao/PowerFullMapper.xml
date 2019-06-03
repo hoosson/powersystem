@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" 
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.gxdl.dyh.dao.PowerFullMapper">
+	<resultMap type="com.gxdl.dyh.po.UserMsgAndMoney" id="UserMsgAndMoney">
+		<result property="usedId" column="userid"/>
+		<result property="username" column="username"/>
+		<result property="accounts" column="accounts"/>
+		<result property="surplusMoney" column="surplus_money"/>
+	</resultMap>
+
+	<resultMap type="com.gxdl.dyh.po.UseConumer" id="UseConumer">
+		<result property="id" column="id"/>
+		<result property="userId" column="userId"/>
+		<result property="accounts" column="accounts"/>
+		<result property="electricitynumber" column="electricitynumber"/>
+		<result property="surplus_money" column="surplus_money"/>
+		<result property="balance_warning" column="balance_warning"/>
+		<result property="power_warning" column="power_warning"/>
+	</resultMap>
+	<!--  在页面加载的时候获取用户的昵称、账户名、所剩余额 -->
+	<select id="getUserMsgAndMoney" parameterType="java.lang.String" resultMap="UserMsgAndMoney">
+		SELECT t.userid,t.username,t.accounts,surplus_money FROM ps_use_conumer t1,(SELECT userid,username,accounts from ps_userinfo where 
+		user_token=#{userToken}) t WHERE t1.userId=t.userid AND t1.accounts=t.accounts;
+	</select>
+	
+	<!-- 用户对账户进行充值 -->
+	<update id="insertFullMoney" parameterType="java.lang.String">
+		update ps_use_conumer set surplus_money=#{fullMoney},electricitynumber=#{powerNumber} where userId=#{userId} and accounts=#{accounts}
+	</update>
+	
+	<!-- 用户原有电量和余额查询 -->
+	<select id="getOriginalPowerMoney" parameterType="java.lang.String" resultMap="UseConumer">
+		select id,userId,accounts,electricitynumber,surplus_money,balance_warning,power_warning
+			 from ps_use_conumer where userId=#{userId} and accounts=#{accounts}
+	</select>
+	
+	<!-- 插入一条充值记录 -->
+	<insert id="insertFullMoneylog" parameterType="com.gxdl.dyh.po.Userfullmoney">
+		insert into ps_fullmoney_log (id,userId,accounts,surplusmoney,fullmoney,fulltime) 
+		values (null,#{userfullmoney.userId},#{userfullmoney.accounts},#{userfullmoney.surplusmoney},
+		#{userfullmoney.fullmoney},#{userfullmoney.fulltime});
+	</insert>
+	<!-- 查询0到4的数据-->
+	<!--  -->
+	<select id="selectFullMoneylog" parameterType="java.lang.String,java.lang.Integer" resultType="com.gxdl.dyh.po.SelectUserInfoandfullmoneylog">
+		SELECT t1.username,t1.accounts,t2.surplusmoney,t2.fullmoney,t2.fulltime FROM ps_userinfo t1 
+JOIN (SELECT accounts,surplusmoney,fullmoney,fulltime FROM ps_fullmoney_log LIMIT 0,4) t2 ON t1.accounts=t2.accounts 
+	</select>
+	<!-- <select id="selectFullMoneylog" parameterType="java.lang.String,java.lang.Integer" resultType="com.gxdl.dyh.po.SelectUserInfoandfullmoneylog">
+		SELECT t1.username,t1.accounts,t2.surplusmoney,t2.fullmoney,t2.fulltime FROM ps_userinfo t1 
+JOIN(SELECT accounts,surplusmoney,fullmoney,fulltime FROM ps_fullmoney_log LIMIT (#{(currentPage-1)*4}},#{(currentPage)*4}) t2 ON t1.accounts=t2.accounts AND t1.user_token=#{userToken}
+	</select> -->
+	<!-- 查询条数 -->
+	<select id="selectFullMoneycount" parameterType="java.lang.String" resultType="java.lang.String">
+	SELECT COUNT(1) FROM ps_fullmoney_log WHERE accounts=#{accounts}
+	</select>
+</mapper>
