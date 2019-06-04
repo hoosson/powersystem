@@ -4,11 +4,11 @@ import java.math.BigDecimal;
 import java.util.Date;
 
 public class SelectUserInfoandfullmoneylog {
-	private String username;//ÓÃ»§ĞÕÃû
-	private String accounts;//ÓÃ»§ÕËºÅ
-	private BigDecimal surplusmoney;//³äÖµÇ°Óà¶î
-	private BigDecimal fullmoney;//³äÖµ½ğ¶î
-	private Date fulltime;//³äÖµÊ±¼ä
+	private String username;//ç”¨æˆ·å§“å
+	private String accounts;//ç”¨æˆ·è´¦å·
+	private BigDecimal surplusmoney;//å……å€¼å‰ä½™é¢
+	private BigDecimal fullmoney;//å……å€¼é‡‘é¢
+	private Date fulltime;//å……å€¼æ—¶é—´
 	
 	public SelectUserInfoandfullmoneylog(String username, String accounts, BigDecimal surplusmoney,
 			BigDecimal fullmoney, Date fulltime) {

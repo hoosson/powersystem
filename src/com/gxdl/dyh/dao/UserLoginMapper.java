@@ -8,31 +8,31 @@ import com.gxdl.dyh.po.UserInfo;
 @Repository("userLoginMapper")
 public interface UserLoginMapper {
 	/*
-	 * ÓÃ»§µÇÂ¼ÑéÖ¤ÊÇ·ñÎ¨Ò»
+	 * ç”¨æˆ·ç™»å½•éªŒè¯æ˜¯å¦å”¯ä¸€
 	 */
 	public UserInfo getUserNameOnly(@Param("username")String username);
 	/*
-	 * Ìá½»×¢²áĞÅÏ¢
+	 * æäº¤æ³¨å†Œä¿¡æ¯
 	 */
 	public void addUserMassage(@Param("userInfo")UserInfo userInfo);
 	/*
-	 * »ñÈ¡ÓÃ»§¼ÓÃÜÊ±»ñÈ¡µÄÑÎ
+	 * è·å–ç”¨æˆ·åŠ å¯†æ—¶è·å–çš„ç›
 	 */
 	public String getUserInfoSalt(@Param("username")String username);
 	/*
-	 * ÑéÖ¤µÇÂ¼Ê±µÄÃÜÂëºÍÓÃ»§Ãû 
-	 * ÃÜÂë=Ã÷ÎÄÏÔÊ¾+ÑÎ
+	 * éªŒè¯ç™»å½•æ—¶çš„å¯†ç å’Œç”¨æˆ·å 
+	 * å¯†ç =æ˜æ–‡æ˜¾ç¤º+ç›
 	 */
 	public UserInfo getUserMassageFlag(@Param("username")String username,@Param("password")String passwordSalt);
 	/*
-	 *userInfo¶ÔÏóÀïÃæ½ö½öÉèÖÃµÇÂ¼µÄÊ±¼äºÍµÇÂ¼µÄ±êÖ¾£¬ÆäËûµÄÊôĞÔÒ»ÂÉÎª¿Õ 
+	 *userInfoå¯¹è±¡é‡Œé¢ä»…ä»…è®¾ç½®ç™»å½•çš„æ—¶é—´å’Œç™»å½•çš„æ ‡å¿—ï¼Œå…¶ä»–çš„å±æ€§ä¸€å¾‹ä¸ºç©º 
 	 */
 	public void addUserLoginSuccessData(@Param("userInfo")UserInfo userInfo);
 	/**
-	 * µÇÂ¼³É¹¦ÒÔºó»ñÈ¡ÓÃ»§ĞÕÃû
+	 * ç™»å½•æˆåŠŸä»¥åè·å–ç”¨æˆ·å§“å
 	 */
 	public UserInfo getUserName(@Param("userToken")String userToken);
-	//×¢²á³É¹¦³õÊ¼»¯Óà¶î
+	//æ³¨å†ŒæˆåŠŸåˆå§‹åŒ–ä½™é¢
 	public void insertUserPowerAndMoneyInit(@Param("userinfo")UserInfo userInfo);
 
 }

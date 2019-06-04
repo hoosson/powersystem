@@ -23,14 +23,14 @@ import net.sf.json.JSONObject;
 @RequestMapping(value="/UserLoginController")
 public class UserLoginController {
 	/**
-	 * ÈÕÖ¾Êä³ö
+	 * æ—¥å¿—è¾“å‡º
 	 */
 	private Logger logger = LoggerFactory.getLogger(UserLoginController.class);
 	
 	@Autowired
 	UserInfoService userInfoService;
 	/*
-	 * ÓÃ»§ÃûÑéÖ¤
+	 * ç”¨æˆ·åéªŒè¯
 	 */
 	@RequestMapping(value="/getUserNameOnly")
 	public @ResponseBody String getUserNameOnly(HttpServletRequest request,HttpServletResponse response,String username) {
@@ -47,7 +47,7 @@ public class UserLoginController {
 	}
 
 		/**
-		 * ÓÃ»§×¢²áÌí¼ÓÓÃ»§µÄĞÅÏ¢
+		 * ç”¨æˆ·æ³¨å†Œæ·»åŠ ç”¨æˆ·çš„ä¿¡æ¯
 		 * @param userInfo
 		 * @return
 		 */
@@ -55,7 +55,7 @@ public class UserLoginController {
 		public @ResponseBody  String addUserMassage(String username,String mobile,
 					  String emaile,String idnumber,String password,String yearday){
 			try {
-				//ÕâÀïÔ­ÔòÉÏÊÇÒª¶ÔÃ¿¸ö²ÎÊı½øĞĞÅĞ¶ÏµÄ£¬Ê±¼äÏŞÖÆÀÏÊ¦²»Ğ´ÁË£¬½»¸øÇ×ÃÇ¡£
+				//è¿™é‡ŒåŸåˆ™ä¸Šæ˜¯è¦å¯¹æ¯ä¸ªå‚æ•°è¿›è¡Œåˆ¤æ–­çš„ï¼Œæ—¶é—´é™åˆ¶è€å¸ˆä¸å†™äº†ï¼Œäº¤ç»™äº²ä»¬ã€‚
 				return this.userInfoService.addUserMassage(username, mobile, emaile, idnumber, password, yearday);
 			} catch (Exception e) {
 				System.out.println("/UserLoginController/addUserMassage Exception:"+e.getMessage());
@@ -63,21 +63,22 @@ public class UserLoginController {
 			}
 		}
 		/*
-		 * µÇÂ¼¹¦ÄÜ
+		 * ç™»å½•åŠŸèƒ½
 		 */
 		@RequestMapping("/userLoginSubmit")
 		public @ResponseBody  JSONObject userLoginSubmit(HttpServletRequest request,String username,String password) {
 			JSONObject jsonObject = new JSONObject();
 			try {
-				//·µ»Ø²éÑ¯µ½µÄuserTokenºÍ¹¤¾ßÀàResPouseUtilÅĞ¶Ï±êÖ¾
+				//è¿”å›æŸ¥è¯¢åˆ°çš„userTokenå’Œå·¥å…·ç±»ResPouseUtilåˆ¤æ–­æ ‡å¿—
+				@SuppressWarnings("unchecked")
 				Map<String,Object> result = this.userInfoService.userLoginSubmit(username, password);
-				//´Ómap¼¯ºÏÖĞ»ñÈ¡userInfo¶ÔÏó²¢·â×°µ½userinfoÖĞ  userinfoÖ»ÓĞuserTokenÖµ£¬LastLoginTime£¬CurrentLoginFlagÖµ
+				//ä»mapé›†åˆä¸­è·å–userInfoå¯¹è±¡å¹¶å°è£…åˆ°userinfoä¸­  userinfoåªæœ‰userTokenå€¼ï¼ŒLastLoginTimeï¼ŒCurrentLoginFlagå€¼
 				UserInfo userinfo = (UserInfo) result.get("userinfo");
-				//´ÓuserinfoÖĞÈ¡³ötokenÖµ·ÅÈësession×÷ÓÃÓòÀï
+				//ä»userinfoä¸­å–å‡ºtokenå€¼æ”¾å…¥sessionä½œç”¨åŸŸé‡Œ
 				request.getSession().setAttribute("userToken", userinfo.getUserToken());
-				//É¾³ıuserinfo£¬mapÖĞÖ»´æÔÚÅĞ¶Ï±êÖ¾
+				//åˆ é™¤userinfoï¼Œmapä¸­åªå­˜åœ¨åˆ¤æ–­æ ‡å¿—
 				result.remove("userinfo");
-				//¸øjsonObject¶ÔÏó×ª»¯³ÉÏÂÃæ¸ñÊ½µÄ·µ»Ø¸øÇ°¶Ë
+				//ç»™jsonObjectå¯¹è±¡è½¬åŒ–æˆä¸‹é¢æ ¼å¼çš„è¿”å›ç»™å‰ç«¯
 				//key="YES" value="key=success,value=YES;key="YES" Value="1""
 				jsonObject.put(ResPouseUtil.SUCCESS,result);
 				return jsonObject;
@@ -91,13 +92,13 @@ public class UserLoginController {
 		}
 		
 		/**
-		 * µÇÂ¼³É¹¦ÒÔºó»ñÈ¡ÓÃ»§ĞÕÃû
+		 * ç™»å½•æˆåŠŸä»¥åè·å–ç”¨æˆ·å§“å
 		 * @param userInfo
 		 * @return
 		 */
 		@RequestMapping("/getUserName")
 		public @ResponseBody  JSONObject getUserName(HttpServletRequest request,String userToken){
-			//ÉêÃ÷Ò»¸öjson¸ñÊ½µÄ¶ÔÏó
+			//ç”³æ˜ä¸€ä¸ªjsonæ ¼å¼çš„å¯¹è±¡
 			JSONObject jsonObject = new JSONObject();
 			try {
 				return this.userInfoService.getUserName(userToken);

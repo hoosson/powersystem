@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <base href="${pageContext.request.scheme }://${pageContext.request.serverName }:${pageContext.request.serverPort }${pageContext.request.contextPath }/">
-		<title>PowerSystem-ç«å³åå¼</title>
+		<title>PowerSystem-立即充值</title>
 		<link type="text/css" href="css/instantFull.css" rel="stylesheet"/>
 		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript">

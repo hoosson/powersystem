@@ -7,12 +7,12 @@ import net.sf.json.JSONObject;
 
 public interface PowerFullService {
 	/**
-	 * ÔÚÒ³Ãæ¼ÓÔØµÄÊ±ºò»ñÈ¡ÓÃ»§µÄêÇ³Æ¡¢ÕË»§Ãû¡¢ËùÊ£Óà¶î
+	 * åœ¨é¡µé¢åŠ è½½çš„æ—¶å€™è·å–ç”¨æˆ·çš„æ˜µç§°ã€è´¦æˆ·åã€æ‰€å‰©ä½™é¢
 	 */
 	public JSONObject getUserMsgAndMoney(String userToken);
 	
 	/**
-	 * ÓÃ»§¶ÔÕË»§½øĞĞ³äÖµ
+	 * ç”¨æˆ·å¯¹è´¦æˆ·è¿›è¡Œå……å€¼
 	 * @param username
 	 * @param accounts
 	 * @param fullMoney
@@ -21,7 +21,7 @@ public interface PowerFullService {
 	public JSONObject insertFullMoney(String userId,String username,String accounts,String fullMoney,String password);
 	
 	/*
-	 * ²éÑ¯0-4ÌõÊı¾İ·µ»Ø½çÃæ
+	 * æŸ¥è¯¢0-4æ¡æ•°æ®è¿”å›ç•Œé¢
 	 */
 	public List<Map> selectFullMoneymsg(String userToken,Integer param);
 }

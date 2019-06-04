@@ -7,20 +7,20 @@ import com.gxdl.dyh.po.UserInfo;
 import net.sf.json.JSONObject;
 
 public interface UserInfoService {
-	//校验用户名是否唯一
+	//鏍￠獙鐢ㄦ埛鍚嶆槸鍚﹀敮涓�
 	public String getUserNameOnly(String username);
 
-    //注册提交
+    //娉ㄥ唽鎻愪氦
 	public String addUserMassage(String username,String mobile,
 			  String emaile,String idnumber,String password,String yearday);
-	//校验登录时的账号密码
+	//鏍￠獙鐧诲綍鏃剁殑璐﹀彿瀵嗙爜
 	public Map userLoginSubmit(String username,String password);
 
 	
-	//登录成功以后获取用户姓名	
+	//鐧诲綍鎴愬姛浠ュ悗鑾峰彇鐢ㄦ埛濮撳悕	
 	public JSONObject getUserName(String userToken);
 	/**
-	 *    校验用户密码
+	 *    鏍￠獙鐢ㄦ埛瀵嗙爜
 	 * @param username
 	 * @param password
 	 * @return

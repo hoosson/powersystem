@@ -21,9 +21,12 @@
 	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript">
 	var userToken = "${userToken}";
-	//
+
+	$(function(){
+		fulloneMassage(1);
+	})
 	function fulloneMassage(currentPage){
-		window.location.href="PowerFullController/selectFullMoneymsg.do?userToken="+userToken+"/currentPage"+currentPage;
+		//window.location.href="PowerFullController/selectFullMoneymsg.do?userToken="+userToken+"&currentPage"+currentPage;
 	}
 	function fullMassage(param) {
 		//不小于最小整数 总数除10总页数
@@ -45,7 +48,7 @@
 	}
 	</script>
 	</head>
-	<body onload="fulloneMassage(1);">
+	<body <!-- onload="fulloneMassage(1);" -->>
 		<div class="full_hard">----------------&emsp;查询充值记录&emsp;---------------</div>
 		<br />
 		<div class="condition_div">

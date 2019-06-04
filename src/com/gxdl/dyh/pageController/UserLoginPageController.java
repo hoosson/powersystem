@@ -1,14 +1,26 @@
 package com.gxdl.dyh.pageController;
 
-import javax.servlet.http.HttpServletRequest;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.servlet.ModelAndView;
+
+import com.gxdl.dyh.service.PowerFullService;
 
 @Controller
 @RequestMapping(value="/UserLoginPageController")
 public class UserLoginPageController {
+	
+	@Autowired
+	private PowerFullService powerFullService;
 	
 	@RequestMapping(value="/toUserLoginControllerJsp")
 	public String toUserLoginControllerJsp(){
@@ -18,13 +30,13 @@ public class UserLoginPageController {
 	public String toUserRegisterJsp() {
 		return "userlogin/userRegister";
 	}
-	//Ìø×ªÖÁÉÌÆ·Ò³
+	//è·³è½¬è‡³å•†å“é¡µ
 	@RequestMapping(value="/toShopingJsp")
 	public String toShopingJsp() {
 		return "userlogin/shoping";
 	}
 	/**
-	 * ÓÃ»§µÇÂ¼³É¹¦ÒÔºóÌø×ªµ½ÏµÍ³µÄÖ÷Ò³Ãæ
+	 * ç”¨æˆ·ç™»å½•æˆåŠŸä»¥åŽè·³è½¬åˆ°ç³»ç»Ÿçš„ä¸»é¡µé¢
 	 */
 	@RequestMapping(value="/toMainPageJsp")
 	public String toMainPageJsp(ModelMap modelMap,String userToken){
@@ -34,7 +46,7 @@ public class UserLoginPageController {
 	}
 	
 	/**
-	 * Ö÷Ò³Ãæ¼ÓÔØµÄÊ±ºò¶Ô×ÓÒ³Ãæ½øÐÐ³õÊ¼»¯²Ù×÷--³õÊ¼»¯¶¥²¿µÄÒ³Ãæ
+	 * ä¸»é¡µé¢åŠ è½½çš„æ—¶å€™å¯¹å­é¡µé¢è¿›è¡Œåˆå§‹åŒ–æ“ä½œ--åˆå§‹åŒ–é¡¶éƒ¨çš„é¡µé¢
 	 */
 	@RequestMapping(value="/toMainHeadPage")
 	public String toMainHeadPage(HttpServletRequest request,String userToken,ModelMap modelMap){
@@ -45,7 +57,7 @@ public class UserLoginPageController {
 	}
 	
 	/**
-	 * Ö÷Ò³Ãæ¼ÓÔØµÄÊ±ºò¶Ô×ÓÒ³Ãæ½øÐÐ³õÊ¼»¯²Ù×÷--³õÊ¼»¯×ó²¿µÄÒ³Ãæ
+	 * ä¸»é¡µé¢åŠ è½½çš„æ—¶å€™å¯¹å­é¡µé¢è¿›è¡Œåˆå§‹åŒ–æ“ä½œ--åˆå§‹åŒ–å·¦éƒ¨çš„é¡µé¢
 	 */
 	@RequestMapping(value="/toMainLeftPage")
 	public String toMainLeftPage(String userToken,ModelMap modelMap){
@@ -56,7 +68,7 @@ public class UserLoginPageController {
 	}
 	
 	/**
-	 * Ìø×ªµ½ÓÃ»§µÄÁ¢¼´³åÖµÒ³Ãæ
+	 * è·³è½¬åˆ°ç”¨æˆ·çš„ç«‹å³å†²å€¼é¡µé¢
 	 */
 	@RequestMapping(value="/toFullMoneyPageJsp")
 	public String toFullMoneyPageJsp(String userToken,ModelMap modelMap){
@@ -67,13 +79,24 @@ public class UserLoginPageController {
 	}
 	
 	/**
-	 * Ìø×ªµ½ÓÃ»§µÄ³äÖµ¼ÇÂ¼µÄÒ³Ãæ
+	 * è·³è½¬åˆ°ç”¨æˆ·çš„å……å€¼è®°å½•çš„é¡µé¢
 	 */
 	@RequestMapping(value="/toFullMoneyLogPageJsp")
-	public String toFullMoneyLogPageJsp(String userToken,ModelMap modelMap){
+	public ModelAndView toFullMoneyLogPageJsp(String userToken,ModelMap modelMap, Integer currentPage){
+		ModelAndView mav = new ModelAndView("main/fullMoney");
 		if(userToken != null && userToken.length() > 0){
 			modelMap.put("userToken", userToken);
+			
+			List<Map> map = powerFullService.selectFullMoneymsg(userToken,1);
+			HashMap<Object, Object> currentPageMap = new HashMap<>();
+			currentPageMap.put("currentPage", "1");
+			map.add(currentPageMap);
+			//request.getSession().setAttribute("data",map);
+			mav.addObject("data", map);
+			//mav.setViewName("main/fullMoney");
+			
 		}
-		return "main/fullMoney";
+		//return "main/fullMoney";
+		return mav;
 	}
 }

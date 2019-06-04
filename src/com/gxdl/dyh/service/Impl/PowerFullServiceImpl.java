@@ -22,6 +22,7 @@ import com.gxdl.dyh.utils.ResPouseUtil;
 
 import net.sf.json.JSONObject;
 
+import com.gxdl.dyh.po.PsFullmoneyLog;
 import com.gxdl.dyh.po.SelectUserInfoandfullmoneylog;
 import com.gxdl.dyh.po.UseConumer;
 import com.gxdl.dyh.po.UserMsgAndMoney;
@@ -31,7 +32,7 @@ import com.gxdl.dyh.po.Userfullmoney;
 @Service("powerFullService")
 public class PowerFullServiceImpl implements PowerFullService {
 	/**
-	 * ÈÕÖ¾Êä³ö
+	 * æ—¥å¿—è¾“å‡º
 	 */
 	private Logger logger = LoggerFactory.getLogger(PowerFullServiceImpl.class);
 	
@@ -40,7 +41,7 @@ public class PowerFullServiceImpl implements PowerFullService {
 	@Autowired
 	private UserInfoService userInfoService;
 	/**
-	 * ÔÚÒ³Ãæ¼ÓÔØµÄÊ±ºò»ñÈ¡ÓÃ»§µÄêÇ³Æ¡¢ÕË»§Ãû¡¢ËùÊ£Óà¶î
+	 * åœ¨é¡µé¢åŠ è½½çš„æ—¶å€™è·å–ç”¨æˆ·çš„æ˜µç§°ã€è´¦æˆ·åã€æ‰€å‰©ä½™é¢
 	 */
 	@Override
 	public JSONObject getUserMsgAndMoney(String userToken) {
@@ -73,7 +74,7 @@ public class PowerFullServiceImpl implements PowerFullService {
 
 	
 	/**
-	 * ÓÃ»§¶ÔÕË»§½øĞĞ³äÖµ
+	 * ç”¨æˆ·å¯¹è´¦æˆ·è¿›è¡Œå……å€¼
 	 * @param username
 	 * @param accounts
 	 * @param fullMoney
@@ -83,7 +84,7 @@ public class PowerFullServiceImpl implements PowerFullService {
 	public JSONObject insertFullMoney(String userId,String username, String accounts, String fullMoney,String password) {
 		JSONObject jsonObject = new JSONObject();
 		try {
-			//Ğ£ÑéÓÃ»§µÄÉí·İ
+			//æ ¡éªŒç”¨æˆ·çš„èº«ä»½
 			if(username != null && password != null) {
 				Map<String,String> map = this.userInfoService.verifyPassword(username, password);
 				if(map == null || map.get(ResPouseUtil.SUCCESS_KRY).equals(ResPouseUtil.FAIL)) {
@@ -91,21 +92,21 @@ public class PowerFullServiceImpl implements PowerFullService {
 					return jsonObject;
 				}
 			}
-			//²éÑ¯Ò»ÏÂÓÃ»§µÄ´Ë´ÎÃ»ÓĞ³äÖµÖ®Ç°µÄÊ£ÓàµçÁ¿ºÍÊ£Óà½ğ¶î
+			//æŸ¥è¯¢ä¸€ä¸‹ç”¨æˆ·çš„æ­¤æ¬¡æ²¡æœ‰å……å€¼ä¹‹å‰çš„å‰©ä½™ç”µé‡å’Œå‰©ä½™é‡‘é¢
 			if(userId != null && accounts != null && fullMoney != null){
 				UseConumer useConumer = this.powerFullMapper.getOriginalPowerMoney(userId, accounts);
 				if(useConumer == null) {
 					jsonObject.put(ResPouseUtil.SUCCESS_KRY, ResPouseUtil.FAIL);
 					return jsonObject;
 				}
-				//´Ë´¦µÄÊı¾İ´ÓÏµÍ³²ÎÊı±íÖĞ»ñµÃ
-			    BigDecimal param = new BigDecimal(0.5); //ÕâÃ¿¶ÈµãµÄ¼ÛÇ®
-			    BigDecimal fullMoneyDecimal = new BigDecimal(fullMoney); ///µ±Ç°³äÖµµÄ½ğ¶î
-			    BigDecimal powerNumber = fullMoneyDecimal.divide(param,2,BigDecimal.ROUND_HALF_UP);//powerNumberÊÇ¸ù¾İÓÃ»§µÄ³äÖµ½ğ¶îºÍÃ¿¶ÈµãµÄ¼ÛÇ®¼ÆËã³öÀ´µÄ×ÜµçÁ¿
-			    BigDecimal finalMoney = fullMoneyDecimal.add(useConumer.getSurplus_money());//µ±Ç°³äÖµµÄ½ğ¶î¼ÓÉÏÔ­À´Ê£ÓàµÄ½ğ¶î¾ÍÊÇÄ¿Ç°×Ü¹²µÄ½ğ¶î
-			    BigDecimal finalpowerNumber=powerNumber.add(useConumer.getElectricitynumber());//µ±Ç°¼ÆËã³öÀ´µÄ³äÖµµçÁ¿¼ÓÉÏÔ­À´Ê£ÓàµÄµçÁ¿¾ÍÊÇÄ¿Ç°×Ü¹²µÄµçÁ¿
+				//æ­¤å¤„çš„æ•°æ®ä»ç³»ç»Ÿå‚æ•°è¡¨ä¸­è·å¾—
+			    BigDecimal param = new BigDecimal(0.5); //è¿™æ¯åº¦ç‚¹çš„ä»·é’±
+			    BigDecimal fullMoneyDecimal = new BigDecimal(fullMoney); ///å½“å‰å……å€¼çš„é‡‘é¢
+			    BigDecimal powerNumber = fullMoneyDecimal.divide(param,2,BigDecimal.ROUND_HALF_UP);//powerNumberæ˜¯æ ¹æ®ç”¨æˆ·çš„å……å€¼é‡‘é¢å’Œæ¯åº¦ç‚¹çš„ä»·é’±è®¡ç®—å‡ºæ¥çš„æ€»ç”µé‡
+			    BigDecimal finalMoney = fullMoneyDecimal.add(useConumer.getSurplus_money());//å½“å‰å……å€¼çš„é‡‘é¢åŠ ä¸ŠåŸæ¥å‰©ä½™çš„é‡‘é¢å°±æ˜¯ç›®å‰æ€»å…±çš„é‡‘é¢
+			    BigDecimal finalpowerNumber=powerNumber.add(useConumer.getElectricitynumber());//å½“å‰è®¡ç®—å‡ºæ¥çš„å……å€¼ç”µé‡åŠ ä¸ŠåŸæ¥å‰©ä½™çš„ç”µé‡å°±æ˜¯ç›®å‰æ€»å…±çš„ç”µé‡
 				Integer result = this.powerFullMapper.insertFullMoney(userId,username, accounts, finalMoney.toString(),finalpowerNumber.toString());
-				//Ìí¼ÓÖ§¸¶¼ÇÂ¼ĞÅÏ¢
+				//æ·»åŠ æ”¯ä»˜è®°å½•ä¿¡æ¯
 				Userfullmoney userfullmoney = new Userfullmoney(Long.parseLong(userId),accounts,useConumer.getSurplus_money(),fullMoneyDecimal,new Date());
 				this.powerFullMapper.insertFullMoneylog(userfullmoney);
 				if(result <= 0) {
@@ -135,7 +136,11 @@ public class PowerFullServiceImpl implements PowerFullService {
 	public List<Map> selectFullMoneymsg(String userToken,Integer currentPage) {
 		// TODO Auto-generated method stub
 		List<Map> list = new ArrayList<Map>();
-		SelectUserInfoandfullmoneylog selectuam=powerFullMapper.selectFullMoneylog(userToken,currentPage);
+
+		HashMap <String,Object> datamap=new HashMap<String,Object>();//æŠŠæ•°æ®å°è£…åˆ°map
+		datamap.put("userToken", userToken);
+		datamap.put("currentPage", currentPage);
+		PsFullmoneyLog selectuam=powerFullMapper.selectFullMoneylog(datamap);
 		System.out.println(selectuam);
 		String accounts=selectuam.getAccounts();
 		String countpage=this.powerFullMapper.selectFullMoneycount(accounts);

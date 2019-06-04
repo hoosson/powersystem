@@ -4,7 +4,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <base href="${pageContext.request.scheme }://${pageContext.request.serverName }:${pageContext.request.serverPort }${pageContext.request.contextPath }/">
-<title>Insert title here</title>
+<title>Power-System-用户登录</title>
   <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
   <META NAME="Generator" CONTENT="EditPlus">
   <META NAME="Author" CONTENT="">
@@ -74,7 +74,7 @@ input{
     background-color: #2D2D3F;
 }
 .but1{
-    width: 300px;
+    width: 322px;
     min-height: 20px;
     display: block;
     background-color: #4a77d4;
@@ -87,7 +87,7 @@ input{
     margin: 0;
 }
 .but2{
-    width: 300px;
+    width: 322px;
     min-height: 20px;
     display: block;
     background-color: #4a77d4;
@@ -107,11 +107,13 @@ input{
  
     <div id="login">
         <h1>Login</h1>
-            <input type="text" required="required" placeholder="用户名"  id="username"></input>
-            <input type="password" required="required" placeholder="密码"  id="password"></input>
-            <button class="but1" type="submit" onclick="submitLogin();">登录</button>
-            <button class="but2" type="submit" onclick="touserRegister();">注册</button>
-            <font id="usernameloginFont"></font>
+        <input type="text" required="required" placeholder="用户名"  id="username"></input>
+        <input type="password" required="required" placeholder="密码"  id="password"></input>
+        <button class="but1" type="button" onclick="submitLogin();">登录</button>
+        <div style="padding:10px 0;">
+        	<button class="but2" type="button" onclick="touserRegister();">注册</button>
+        </div>
+        <font id="usernameloginFont"></font>
     </div>
  
 <canvas id="sakura"></canvas>
@@ -1224,11 +1226,12 @@ window.addEventListener('load', function(e) {
 				"username":username,
 				"password":password
 			},
+			dataType: "json",
 			success:function(data){
 				var json = data.YES;
 				if(json.SUCCESS == "YES" && json.YES == "1"){
 					//请求成功并且用户可以登录
-					$("#usernameloginFont").text("*成功登录")
+					$("#usernameloginFont").text("*成功登录");
 					$("#usernameloginFont").css("color","red");
 					window.location.href="UserLoginPageController/toMainPageJsp.do?userToken=''";
 				}

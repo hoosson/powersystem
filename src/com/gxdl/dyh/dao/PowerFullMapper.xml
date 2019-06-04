@@ -42,10 +42,9 @@
 		#{userfullmoney.fullmoney},#{userfullmoney.fulltime});
 	</insert>
 	<!-- 查询0到4的数据-->
-	<!--  -->
-	<select id="selectFullMoneylog" parameterType="java.lang.String,java.lang.Integer" resultType="com.gxdl.dyh.po.SelectUserInfoandfullmoneylog">
-		SELECT t1.username,t1.accounts,t2.surplusmoney,t2.fullmoney,t2.fulltime FROM ps_userinfo t1 
-JOIN (SELECT accounts,surplusmoney,fullmoney,fulltime FROM ps_fullmoney_log LIMIT 0,4) t2 ON t1.accounts=t2.accounts 
+	<!-- parameterType="java.lang.String,java.lang.Integer" -->
+	<select id="selectFullMoneylog" parameterType="java.util.Map"  resultType="com.gxdl.dyh.po.PsFullmoneyLog">
+	select a.* from ps_fullmoney_log a LEFT JOIN ps_userinfo b ON a.userid=b.userid where b.user_token=#{userToken} limit 0,#{currentPage}
 	</select>
 	<!-- <select id="selectFullMoneylog" parameterType="java.lang.String,java.lang.Integer" resultType="com.gxdl.dyh.po.SelectUserInfoandfullmoneylog">
 		SELECT t1.username,t1.accounts,t2.surplusmoney,t2.fullmoney,t2.fulltime FROM ps_userinfo t1 

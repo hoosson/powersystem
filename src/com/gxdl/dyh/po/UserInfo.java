@@ -9,64 +9,64 @@ public class UserInfo implements Serializable{
 	 */
 	private static final long serialVersionUID = 7490443177015928851L;
 
-	/** Ö÷¼ü  userid **/
+	/** ä¸»é”®  userid **/
     private Long userid;
 
-    /** ÓÃ»§ĞÕÃû  username **/
+    /** ç”¨æˆ·å§“å  username **/
     private String username;
 
-    /** ÃÜÂë¼ÓÃÜ´æ´¢  passwords **/
+    /** å¯†ç åŠ å¯†å­˜å‚¨  passwords **/
     private String passwords;
 
-    /** ¼ÓÃÜ´æ´¢µÄsalt  salt **/
+    /** åŠ å¯†å­˜å‚¨çš„salt  salt **/
     private String salt;
 
-    /** ÓÃ»§µÄtokenÖµ  user_token **/
+    /** ç”¨æˆ·çš„tokenå€¼  user_token **/
     private String userToken;
 
-    /** ÓÃ»§ÕË»§  accounts **/
+    /** ç”¨æˆ·è´¦æˆ·  accounts **/
     private String accounts;
 
-    /** ÓÃ»§Í·ÏñµØÖ·  hand_pic **/
+    /** ç”¨æˆ·å¤´åƒåœ°å€  hand_pic **/
     private String handPic;
 
-    /** ÓÊÏäµØÖ·  email **/
+    /** é‚®ç®±åœ°å€  email **/
     private String email;
 
-    /** ÄêÁä  age **/
+    /** å¹´é¾„  age **/
     private String age;
 
-    /** ÓÃ»§µÄÊÖ»úºÅÂë  mobile **/
+    /** ç”¨æˆ·çš„æ‰‹æœºå·ç   mobile **/
     private String mobile;
 
-    /** ÓÃ»§µÄÉí·İÖ¤ºÅ  identity **/
+    /** ç”¨æˆ·çš„èº«ä»½è¯å·  identity **/
     private String identity;
 
-    /** ³öÉúÈÕÆÚ  birthday **/
+    /** å‡ºç”Ÿæ—¥æœŸ  birthday **/
     private String birthday;
 
     /**   nationality **/
     private String nationality;
 
-    /** Ê¡·İ  province **/
+    /** çœä»½  province **/
     private String province;
 
-    /** ³ÇÊĞ  city **/
+    /** åŸå¸‚  city **/
     private String city;
 
-    /** ÓÃ»§µÄÏêÏ¸µØÖ·  address **/
+    /** ç”¨æˆ·çš„è¯¦ç»†åœ°å€  address **/
     private String address;
 
-    /** ÓÃ»§×¢²áÊ±¼ä  create_time **/
+    /** ç”¨æˆ·æ³¨å†Œæ—¶é—´  create_time **/
     private Date createTime;
 
-    /** ÓÃ»§×îºóÒ»´ÎµÇÂ¼µÄÊ±¼ä  last_login_time **/
+    /** ç”¨æˆ·æœ€åä¸€æ¬¡ç™»å½•çš„æ—¶é—´  last_login_time **/
     private Date lastLoginTime;
 
-    /** ÓÃ»§ÊÇ·ñÔÚµÇÂ¼±êÖ¾£¬ÍË³öµÇÂ¼Ê±Îª0£¬µÇÂ¼Ê±Îª1  current_login_flag **/
+    /** ç”¨æˆ·æ˜¯å¦åœ¨ç™»å½•æ ‡å¿—ï¼Œé€€å‡ºç™»å½•æ—¶ä¸º0ï¼Œç™»å½•æ—¶ä¸º1  current_login_flag **/
     private String currentLoginFlag;
 
-    /** ±¸×¢  remark **/
+    /** å¤‡æ³¨  remark **/
     private String remark;
 
 	@Override

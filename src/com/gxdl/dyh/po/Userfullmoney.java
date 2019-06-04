@@ -11,12 +11,12 @@ public class Userfullmoney implements Serializable{
 	 */
 	private static final long serialVersionUID = 1L;
 	
-	private Long id;//Ö÷¼ü
-	private Long userId;//ÓÃ»§µÄuserid
-	private String accounts;//ÓÃ»§ÕËºÅ
-	private BigDecimal surplusmoney;//³äÖµÇ°Óà¶î
-	private BigDecimal fullmoney;//³äÖµ½ğ¶î
-	private Date fulltime;//³äÖµÊ±¼ä
+	private Long id;//ä¸»é”®
+	private Long userId;//ç”¨æˆ·çš„userid
+	private String accounts;//ç”¨æˆ·è´¦å·
+	private BigDecimal surplusmoney;//å……å€¼å‰ä½™é¢
+	private BigDecimal fullmoney;//å……å€¼é‡‘é¢
+	private Date fulltime;//å……å€¼æ—¶é—´
 	
 	public Userfullmoney(Long userId, String accounts, BigDecimal surplusmoney, BigDecimal fullmoney,
 			Date fulltime) {

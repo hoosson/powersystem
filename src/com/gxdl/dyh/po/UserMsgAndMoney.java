@@ -3,7 +3,7 @@ package com.gxdl.dyh.po;
 import java.io.Serializable;
 
 /**
- * ×¨ÃÅÓÃÓÚ·â×°Êı¾İµÄpo¶ÔÏó£¬Õâ¸ö¶ÔÏó²»ºÍÈÎºÎÊı¾İ¿âµÄ±í¶ÔÓ¦¡£
+ * ä¸“é—¨ç”¨äºå°è£…æ•°æ®çš„poå¯¹è±¡ï¼Œè¿™ä¸ªå¯¹è±¡ä¸å’Œä»»ä½•æ•°æ®åº“çš„è¡¨å¯¹åº”ã€‚
  * @author Administrator
  *
  */
@@ -16,11 +16,11 @@ public class UserMsgAndMoney implements Serializable{
 	private static final long serialVersionUID = -4248220962889292010L;
 
 	private Long usedId;
-	//ÓÃ»§ĞÕÃû
+	//ç”¨æˆ·å§“å
 	private String username;
-	//ÓÃ»§ÕË»§
+	//ç”¨æˆ·è´¦æˆ·
 	private String accounts;
-	//ÓÃ»§ÕË»§Óà¶î
+	//ç”¨æˆ·è´¦æˆ·ä½™é¢
 	private String surplusMoney;
 	
 	public Long getUsedId() {

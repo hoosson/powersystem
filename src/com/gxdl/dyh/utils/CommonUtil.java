@@ -4,26 +4,26 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 /**
- * ¹«¹²µÄ¹¤¾ßÀà
+ * å…¬å…±çš„å·¥å…·ç±»
  * @author chendawei
- * @date 2019Äê3ÔÂ24ÈÕ14:11:03 
+ * @date 2019å¹´3æœˆ24æ—¥14:11:03 
  *
  */
 public final class CommonUtil {
 	
-	//»ù´¡×Ö·û´®
+	//åŸºç¡€å­—ç¬¦ä¸²
 	private static final String BASE_STR = "0aoei9ubpmf8d7t6n5lgkhj3qxrz4c2sy1w";
 	
-	//Token»ù´¡×Ö·û´®
+	//TokenåŸºç¡€å­—ç¬¦ä¸²
 	private static final String BASE_TOKEN_STR = "A0aoQAeCi9DuRbQDDXpmNVTFfXR8dG7DZMQEYDXGt6nFTIASSG5lJgVDkYSCDGPhj3qxrGz4c2sy1w";
 	
-	//´¿Êı×Ö»ù´¡×Ö·û´®
+	//çº¯æ•°å­—åŸºç¡€å­—ç¬¦ä¸²
 	private static final String BASE_NUMBER = "0192837465";
 	
 	/**
-	 * »ñÈ¡Ö¸¶¨Î»ÊıµÄĞ¡Ğ´×ÖÄ¸¡¢Êı×Ö×éºÏµÄ×Ö·û´®,Ä¬ÈÏ16Î»
+	 * è·å–æŒ‡å®šä½æ•°çš„å°å†™å­—æ¯ã€æ•°å­—ç»„åˆçš„å­—ç¬¦ä¸²,é»˜è®¤16ä½
 	 * @param digit
-	 * @return Ëæ»ú×Ö·û´®
+	 * @return éšæœºå­—ç¬¦ä¸²
 	 */
 	public static String getRandomString(Integer digit){
 		if(digit == null){
@@ -42,9 +42,9 @@ public final class CommonUtil {
 	}
 	
 	/**
-	 * Éú³ÉÓÃ»§TokenValue
+	 * ç”Ÿæˆç”¨æˆ·TokenValue
 	 * @param digit
-	 * @return 32Î»TokenÖµ
+	 * @return 32ä½Tokenå€¼
 	 */
 	public static String getUserTokenValue(){
 		final Integer digit = 32;
@@ -57,9 +57,9 @@ public final class CommonUtil {
 	}
 	
 	/**
-	 * Éú³ÉÓÃ»§ÒÔµ±Ç°Äê·İÎª¿ªÍ·µÄ8Î»Ëæ»ú¹¤ºÅ
+	 * ç”Ÿæˆç”¨æˆ·ä»¥å½“å‰å¹´ä»½ä¸ºå¼€å¤´çš„8ä½éšæœºå·¥å·
 	 * @param digit
-	 * @return ÒÔµ±Ç°Äê·İÎª¿ªÍ·µÄ8Î»Ëæ»ú¹¤ºÅ
+	 * @return ä»¥å½“å‰å¹´ä»½ä¸ºå¼€å¤´çš„8ä½éšæœºå·¥å·
 	 */
 	public static String getUserJobNumber(){
 		final Integer digit = 4;
@@ -73,9 +73,9 @@ public final class CommonUtil {
 	}
 	
 	/**
-	 * ´ÓÓÃ»§µÄÉí·İÖ¤ºÅÂëÀïÃæÌáÈ¡ÓÃ»§µÄÄêÁä
+	 * ä»ç”¨æˆ·çš„èº«ä»½è¯å·ç é‡Œé¢æå–ç”¨æˆ·çš„å¹´é¾„
 	 * 622301 1982 10 02 0538
-	 * @param idNumber ÓÃ»§µÄÉí·İÖ¤ºÅÂë
+	 * @param idNumber ç”¨æˆ·çš„èº«ä»½è¯å·ç 
 	 * @return
 	 */
 	public static String getUserMassageInAge(String idNumber){

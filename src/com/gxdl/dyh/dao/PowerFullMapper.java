@@ -2,10 +2,12 @@ package com.gxdl.dyh.dao;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.HashMap;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
+import com.gxdl.dyh.po.PsFullmoneyLog;
 import com.gxdl.dyh.po.UserMsgAndMoney;
 import com.gxdl.dyh.po.Userfullmoney;
 import com.gxdl.dyh.po.SelectUserInfoandfullmoneylog;
@@ -13,10 +15,10 @@ import com.gxdl.dyh.po.UseConumer;
 
 @Repository("powerFullMapper")
 public interface PowerFullMapper {
-	//ÔÚÒ³Ãæ¼ÓÔØµÄÊ±ºò»ñÈ¡ÓÃ»§µÄêÇ³Æ ÕË»§Ãû ËùÊ£Óà¶î
+	//åœ¨é¡µé¢åŠ è½½çš„æ—¶å€™è·å–ç”¨æˆ·çš„æ˜µç§° è´¦æˆ·å æ‰€å‰©ä½™é¢
 	public UserMsgAndMoney getUserMsgAndMoney(@Param("userToken")String userToken);
 	/**
-	 * ÓÃ»§¶ÔÕË»§½øĞĞ³äÖµ
+	 * ç”¨æˆ·å¯¹è´¦æˆ·è¿›è¡Œå……å€¼
 	 * @param username
 	 * @param accounts
 	 * @param fullMoney
@@ -25,21 +27,21 @@ public interface PowerFullMapper {
 			@Param("accounts")String accounts,@Param("fullMoney")String fullMoney,@Param("powerNumber")String powerNumber);
 	
 	/**
-	 * ²éÑ¯³öÔ­À´µÄµçÁ¿ºÍÓà¶î
+	 * æŸ¥è¯¢å‡ºåŸæ¥çš„ç”µé‡å’Œä½™é¢
 	 */
 	public UseConumer getOriginalPowerMoney(@Param("userId")String userId,@Param("accounts")String accounts);
 	/*
-	 * ²åÈëÒ»Ìõ³äÖµ¼ÇÂ¼
+	 * æ’å…¥ä¸€æ¡å……å€¼è®°å½•
 	 */
 	public void insertFullMoneylog(@Param("userfullmoney")Userfullmoney userfullmoney);
 	
 	/*
-	 * ²éÑ¯ËùÓĞ¼ÇÂ¼
+	 * æŸ¥è¯¢æ‰€æœ‰è®°å½•
 	 */
-	public SelectUserInfoandfullmoneylog selectFullMoneylog(@Param("userToken")String userToken,@Param("currentPage")Integer currentPage); 
-	
+	//public SelectUserInfoandfullmoneylog selectFullMoneylog(@Param("userToken")String userToken,@Param("currentPage")Integer currentPage); 
+	public PsFullmoneyLog selectFullMoneylog(HashMap <String,Object> datamap); 
 	/*
-	 * ²éÑ¯ËùÓĞ¼ÇÂ¼µÄÌõÊı
+	 * æŸ¥è¯¢æ‰€æœ‰è®°å½•çš„æ¡æ•°
 	 */
 	public String selectFullMoneycount(@Param("accounts")String accounts);
 }

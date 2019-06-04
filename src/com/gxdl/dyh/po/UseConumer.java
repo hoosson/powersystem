@@ -4,7 +4,7 @@ import java.io.Serializable;
 import java.math.BigDecimal;
 
 /**
- * ÓÃ»§µçÁ¿ºÍÓà¶î³õÊ¼»¯±í
+ * ç”¨æˆ·ç”µé‡å’Œä½™é¢åˆå§‹åŒ–è¡¨
  * @author Administrator
  *
  */
@@ -15,13 +15,13 @@ public class UseConumer implements Serializable{
 	 */
 	private static final long serialVersionUID = -4115938535957591781L;
 	
-	private Long id;//Ö÷¼ü
-	private Long userId;//ÓÃ»§µÄuserid
-	private String accounts;//ÓÃ»§ÕËºÅ
-	private BigDecimal electricitynumber;//ÓÃ»§ËùÊ£µçÁ¿
-	private BigDecimal surplus_money;//ÓÃ»§ÕË»§ËùÊ£Óà¶î
-	private BigDecimal balance_warning;//Óà¶î¸æ¾¯ÉèÖÃÖµ
-	private BigDecimal power_warning;//Óà¶î¸æ¾¯ÉèÖÃÖµ
+	private Long id;//ä¸»é”®
+	private Long userId;//ç”¨æˆ·çš„userid
+	private String accounts;//ç”¨æˆ·è´¦å·
+	private BigDecimal electricitynumber;//ç”¨æˆ·æ‰€å‰©ç”µé‡
+	private BigDecimal surplus_money;//ç”¨æˆ·è´¦æˆ·æ‰€å‰©ä½™é¢
+	private BigDecimal balance_warning;//ä½™é¢å‘Šè­¦è®¾ç½®å€¼
+	private BigDecimal power_warning;//ä½™é¢å‘Šè­¦è®¾ç½®å€¼
 	
 	public Long getId() {
 		return id;

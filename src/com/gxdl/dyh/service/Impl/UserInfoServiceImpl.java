@@ -22,10 +22,10 @@ import com.gxdl.dyh.utils.CommonUtil;
 
 @Service("UserInfoService")
 public class UserInfoServiceImpl implements UserInfoService {
-	//ÈÕÖ¾Êä³ö´òÓ¡
+	//æ—¥å¿—è¾“å‡ºæ‰“å°
 	private Logger logger=LoggerFactory.getLogger(UserInfoServiceImpl.class);
 	/*
-	 * ÓÃ»§µÇÂ¼ÑéÖ¤
+	 * ç”¨æˆ·ç™»å½•éªŒè¯
 	 */
 	@Autowired
 	UserLoginMapper userLoginMapper;
@@ -55,7 +55,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 	/**
-	 * ÓÃ»§×¢²áÌí¼ÓÓÃ»§µÄĞÅÏ¢
+	 * ç”¨æˆ·æ³¨å†Œæ·»åŠ ç”¨æˆ·çš„ä¿¡æ¯
 	 * @param userInfo
 	 * @return
 	 */
@@ -64,7 +64,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 				  String idnumber, String password,String yearday) {
 		try {
 			String salt = CommonUtil.getRandomString(null);
-			//´´½¨UserInfo¶ÔÏó£¬·â×°´Ó¿ØÖÆ²ã´«ÈëµÄ²ÎÊı
+			//åˆ›å»ºUserInfoå¯¹è±¡ï¼Œå°è£…ä»æ§åˆ¶å±‚ä¼ å…¥çš„å‚æ•°
 			UserInfo userinfo = new UserInfo();
 			userinfo.setUsername(username);
 			userinfo.setPasswords(password+salt);
@@ -77,23 +77,23 @@ public class UserInfoServiceImpl implements UserInfoService {
 			userinfo.setMobile(mobile);
 			userinfo.setIdentity(idnumber);
 			userinfo.setBirthday(yearday);
-			userinfo.setNationality("ÖĞ¹ú");
-			userinfo.setProvince("¹ãÎ÷");
-			userinfo.setCity("ÄÏÄş");
-			userinfo.setAddress("¹ãÎ÷×³×å×ÔÖÎÇøÄÏÄşÊĞÎ÷ÏçÌÁÇø°²¼ª´óµÀ15ºÅ");
+			userinfo.setNationality("ä¸­å›½");
+			userinfo.setProvince("å¹¿è¥¿");
+			userinfo.setCity("å—å®");
+			userinfo.setAddress("å¹¿è¥¿å£®æ—è‡ªæ²»åŒºå—å®å¸‚è¥¿ä¹¡å¡˜åŒºå®‰å‰å¤§é“15å·");
 			userinfo.setCreateTime(new Date());
 			userinfo.setLastLoginTime(null);
 			userinfo.setCurrentLoginFlag("0");
 			userinfo.setRemark(null);
 			
 			if(userinfo != null){
-				//±£´æÓÃ»§ĞÅÏ¢
+				//ä¿å­˜ç”¨æˆ·ä¿¡æ¯
 				this.userLoginMapper.addUserMassage(userinfo);
-				//Èç¹û±£´æ³É¹¦Ôò·µ»ØÊı¾İ¿âÉú³ÉµÄÖ÷¼üÒ²¾ÍÊÇuserid
+				//å¦‚æœä¿å­˜æˆåŠŸåˆ™è¿”å›æ•°æ®åº“ç”Ÿæˆçš„ä¸»é”®ä¹Ÿå°±æ˜¯userid
 				Long userid = 0L;
 				userid = userinfo.getUserid();
 				if(userid > 0){
-					 //ÓÃ»§×¢²á³É¹¦ÒÔºó¿ªÊ¼¶ÔÓÃ»§µÄµçÁ¿ºÍÓà¶î½øĞĞ³õÊ¼»¯²Ù×÷
+					 //ç”¨æˆ·æ³¨å†ŒæˆåŠŸä»¥åå¼€å§‹å¯¹ç”¨æˆ·çš„ç”µé‡å’Œä½™é¢è¿›è¡Œåˆå§‹åŒ–æ“ä½œ
 					 this.userLoginMapper.insertUserPowerAndMoneyInit(userinfo);
 					 return ResPouseUtil.SUCCESS;
 				}else{
@@ -110,7 +110,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 
 
-	//ÓÃ»§µÇÂ¼ÑéÖ¤Âß¼­´úÂë¿é
+	//ç”¨æˆ·ç™»å½•éªŒè¯é€»è¾‘ä»£ç å—
 	@Override
 	public Map userLoginSubmit(String username, String password) {
 		// TODO Auto-generated method stub
@@ -128,32 +128,32 @@ public class UserInfoServiceImpl implements UserInfoService {
 							userinfo.setLastLoginTime(new Date());
 							userinfo.setCurrentLoginFlag("1");
 							this.userLoginMapper.addUserLoginSuccessData(userinfo);
-							logger.info("/UserInfoServiceImpl/userLoginSubmit:"+username+"ÓÃ»§µÇÂ¼³É¹¦");
+							logger.info("/UserInfoServiceImpl/userLoginSubmit:"+username+"ç”¨æˆ·ç™»å½•æˆåŠŸ");
 							return map;
 						}else {
-								//²é²»µ½ÓÃ»§µÄĞÅÏ¢ºó·µ»ØĞ¡ÓÚµÈÓÚÁãµÄ½á¹û
+								//æŸ¥ä¸åˆ°ç”¨æˆ·çš„ä¿¡æ¯åè¿”å›å°äºç­‰äºé›¶çš„ç»“æœ
 								map.put(ResPouseUtil.SUCCESS_KRY,ResPouseUtil.SUCCESS);
 								map.put(ResPouseUtil.SUCCESS, ResPouseUtil.FAIL_Flag);
-								logger.info("/UserInfoServiceImpl/userLoginSubmit :"+username+"ÓÃ»§µÄÓÃ»§ÃûÃÜÂëÊäÈë´íÎó£¡");
+								logger.info("/UserInfoServiceImpl/userLoginSubmit :"+username+"ç”¨æˆ·çš„ç”¨æˆ·åå¯†ç è¾“å…¥é”™è¯¯ï¼");
 								return map;
 						}
 					}else {
 							map.put(ResPouseUtil.SUCCESS_KRY,ResPouseUtil.FAIL);
 							map.put(ResPouseUtil.SUCCESS, ResPouseUtil.FAIL_Flag);
 							logger.info("/UserInfoServiceImpl/userLoginSubmit "
-									+ "Exception:"+username+"µÄSalt»ñÈ¡Ê§°Ü£¬¿ÉÄÜµÄÔ­ÒòÊÇÓÃ»§Î´×¢²á»ò·şÎñÆ÷ERROR");
+									+ "Exception:"+username+"çš„Saltè·å–å¤±è´¥ï¼Œå¯èƒ½çš„åŸå› æ˜¯ç”¨æˆ·æœªæ³¨å†Œæˆ–æœåŠ¡å™¨ERROR");
 							return map;
 					}
 				}else {
 					map.put(ResPouseUtil.SUCCESS_KRY,ResPouseUtil.FAIL);
 					map.put(ResPouseUtil.SUCCESS, ResPouseUtil.FAIL_Flag);
-					logger.info("/UserInfoServiceImpl/userLoginSubmit Exception:ÃÜÂëÎª¿Õ");
+					logger.info("/UserInfoServiceImpl/userLoginSubmit Exception:å¯†ç ä¸ºç©º");
 					return map;
 				}
 			}else {
 				map.put(ResPouseUtil.SUCCESS_KRY,ResPouseUtil.FAIL);
 				map.put(ResPouseUtil.SUCCESS, ResPouseUtil.FAIL_Flag);
-				logger.info("/UserInfoServiceImpl/userLoginSubmit Exception: ÓÃ»§ÃûÎª¿Õ!");
+				logger.info("/UserInfoServiceImpl/userLoginSubmit Exception: ç”¨æˆ·åä¸ºç©º!");
 				return map;
 			}
 		} catch (Exception e) {
@@ -166,7 +166,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	
 	
 	/**
-	 * µÇÂ¼³É¹¦ÒÔºó»ñÈ¡ÓÃ»§ĞÕÃû
+	 * ç™»å½•æˆåŠŸä»¥åè·å–ç”¨æˆ·å§“å
 	 */
 	@Override
 	public JSONObject getUserName(String userToken) {
@@ -196,7 +196,7 @@ public class UserInfoServiceImpl implements UserInfoService {
 	}
 	
 	/**
-	 *    Ğ£ÑéÓÃ»§ÃÜÂë
+	 *    æ ¡éªŒç”¨æˆ·å¯†ç 
 	 * @param username
 	 * @param password
 	 * @return
@@ -207,16 +207,16 @@ public class UserInfoServiceImpl implements UserInfoService {
 			Map<String,Object> map = new HashMap<String,Object>();
 			if(username != null && username.length() > 0){
 				if(password != null && password.length() > 0){
-					//²éÑ¯ÓÃ»§µÄsalt
+					//æŸ¥è¯¢ç”¨æˆ·çš„salt
 					String salt = this.userLoginMapper.getUserInfoSalt(username);
 					if(salt.length() > 0 ){
-						//½«ÓÃ»§µÄÃÜÂëºÍÑÎ×éºÏÆğÀ´ÔÙ´Î²éÑ¯
+						//å°†ç”¨æˆ·çš„å¯†ç å’Œç›ç»„åˆèµ·æ¥å†æ¬¡æŸ¥è¯¢
 						UserInfo userinfo = this.userLoginMapper.getUserMassageFlag(username, password+salt);
-						//²éµ½ÓÃ»§µÄĞÅÏ¢ºó·µ»Ø´óÓÚÁãµÄ½á¹û
+						//æŸ¥åˆ°ç”¨æˆ·çš„ä¿¡æ¯åè¿”å›å¤§äºé›¶çš„ç»“æœ
 						if(userinfo != null && userinfo.getUserToken().length() > 0){
 							map.put(ResPouseUtil.SUCCESS_KRY,ResPouseUtil.SUCCESS);
 							return map;
-						}else{//²é²»µ½ÓÃ»§µÄĞÅÏ¢ºó·µ»ØĞ¡ÓÚµÈÓÚÁãµÄ½á¹û
+						}else{//æŸ¥ä¸åˆ°ç”¨æˆ·çš„ä¿¡æ¯åè¿”å›å°äºç­‰äºé›¶çš„ç»“æœ
 							map.put(ResPouseUtil.SUCCESS_KRY,ResPouseUtil.FAIL);
 							return map;
 						}

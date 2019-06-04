@@ -24,14 +24,14 @@ import net.sf.json.JSONObject;
 @RequestMapping("/PowerFullController")
 public class PowerFullController {
 	/*
-	 * ÈÕÖ¾Êä³ö
+	 * æ—¥å¿—è¾“å‡º
 	 */
 	private Logger logger = LoggerFactory.getLogger(PowerFullController.class);
 	
 	@Autowired
 	private PowerFullService powerFullService;
 	/*
-	 * Ò³Ãæ¼ÓÔØµÄÊ±ºò»ñÈ¡ÓÃ»§êÇ³ÆÕË»§ÃûºÍËùÊ£Óà¶î
+	 * é¡µé¢åŠ è½½çš„æ—¶å€™è·å–ç”¨æˆ·æ˜µç§°è´¦æˆ·åå’Œæ‰€å‰©ä½™é¢
 	 */
 	@RequestMapping("/getUserMsgAndMoney")
 	public @ResponseBody JSONObject getUserMsgAndMoney(HttpServletRequest request,String userToken) {
@@ -47,14 +47,14 @@ public class PowerFullController {
 	}
 	
 	/**
-	 * ÓÃ»§¶ÔÕË»§½øĞĞ³äÖµ
+	 * ç”¨æˆ·å¯¹è´¦æˆ·è¿›è¡Œå……å€¼
 	 * @param userInfo
 	 * @return
 	 */
 	@RequestMapping("/insertFullMoney")
 	public @ResponseBody  JSONObject insertFullMoney(HttpServletRequest request,String userToken,
 			String userId,String username,String accounts,String fullMoney,String password,ModelMap modelMap){
-		//ÉêÃ÷Ò»¸öjson¸ñÊ½µÄ¶ÔÏó
+		//ç”³æ˜ä¸€ä¸ªjsonæ ¼å¼çš„å¯¹è±¡
 		JSONObject jsonObject = new JSONObject();
 		try {
 			modelMap.put("userToken", userToken);
@@ -68,7 +68,7 @@ public class PowerFullController {
 	}
 	
 	/**
-	 * ½øÈë·ÖÒ³¹¦ÄÜ²éÑ¯×ÜÌõÊıºÍµÚÒ»Ìõ
+	 * è¿›å…¥åˆ†é¡µåŠŸèƒ½æŸ¥è¯¢æ€»æ¡æ•°å’Œç¬¬ä¸€æ¡
 	 * @param userInfo
 	 * @return
 	 */
