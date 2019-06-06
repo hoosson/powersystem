@@ -3,7 +3,7 @@
 
 数据库类型:  mysql
 
-框架: Spring Structs2 Mybatis( SSH)
+框架: Spring Structs2 Mybatis( SSM)
 
 运行环境:jdk1.7或1.8
 
