@@ -1,7 +1,8 @@
 # powersystem
-电力充值统
+电力充值系统
 
-数据库类型:  mysql
+数据库类型：mysql
+文件路径: powersystem\src\powersystem.sql
 
 框架: Spring Structs2 Mybatis( SSM)
 
