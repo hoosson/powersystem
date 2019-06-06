@@ -15,7 +15,7 @@
 			}
 			//到冲值记录页面
 			function toInstantFullLogPageJsp(){
-				$("#fullMoneyLogId").attr("href","UserLoginPageController/toFullMoneyLogPageJsp.do?userToken="+userToken);
+				$("#fullMoneyLogId").attr("href","UserLoginPageController/toFullMoneyLogPageJsp.do");
 				
 			}
 		</script>

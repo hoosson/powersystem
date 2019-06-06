@@ -2,7 +2,8 @@ package com.gxdl.dyh.dao;
 
 import java.math.BigDecimal;
 import java.util.Date;
-import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
@@ -39,9 +40,16 @@ public interface PowerFullMapper {
 	 * 查询所有记录
 	 */
 	//public SelectUserInfoandfullmoneylog selectFullMoneylog(@Param("userToken")String userToken,@Param("currentPage")Integer currentPage); 
-	public PsFullmoneyLog selectFullMoneylog(HashMap <String,Object> datamap); 
+	public List<Map<String,Object>> selectFullMoneylog(Map <String,Object> datamap); 
 	/*
 	 * 查询所有记录的条数
 	 */
 	public String selectFullMoneycount(@Param("accounts")String accounts);
+	
+	/*
+	 * userToken查询所有记录的条数
+	 */
+	public int findTotalCount(@Param("userToken")String userToken);
+	
+	public List<Map<String, Object>> findByPage(Map <String,Object> datamap);
 }

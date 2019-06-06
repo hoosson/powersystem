@@ -22,6 +22,7 @@ import com.gxdl.dyh.utils.ResPouseUtil;
 
 import net.sf.json.JSONObject;
 
+import com.gxdl.dyh.po.PageBean;
 import com.gxdl.dyh.po.PsFullmoneyLog;
 import com.gxdl.dyh.po.SelectUserInfoandfullmoneylog;
 import com.gxdl.dyh.po.UseConumer;
@@ -133,27 +134,72 @@ public class PowerFullServiceImpl implements PowerFullService {
 
 
 	@Override
-	public List<Map> selectFullMoneymsg(String userToken,Integer currentPage) {
+	public List<Map<String,Object>> selectFullMoneymsg(String userToken,Integer currentPage) {
 		// TODO Auto-generated method stub
-		List<Map> list = new ArrayList<Map>();
+		List<Map<String,Object>> list = new ArrayList<Map<String,Object>>();
 
-		HashMap <String,Object> datamap=new HashMap<String,Object>();//把数据封装到map
+		Map <String,Object> datamap=new HashMap<String,Object>();//把数据封装到map
 		datamap.put("userToken", userToken);
 		datamap.put("currentPage", currentPage);
-		PsFullmoneyLog selectuam=powerFullMapper.selectFullMoneylog(datamap);
+		List<Map<String,Object>> selectuam=powerFullMapper.selectFullMoneylog(datamap);
 		System.out.println(selectuam);
-		String accounts=selectuam.getAccounts();
-		String countpage=this.powerFullMapper.selectFullMoneycount(accounts);
-		/*
-		 * while(selectuam.next()) { Map map = new HashMap<>(); String username =
-		 * selectuam.getUsername(); String accounts = selectuam.getAccounts(); String
-		 * surplusmoney = selectuam.getSurplusmoney(); String fullmoney =
-		 * selectuam.getFullmoney(); String fulltime = selectuam.getFulltime();
-		 * map.put("username",username); map.put("accounts",accounts);
-		 * map.put("surplusmoney",surplusmoney); map.put("fullmoney",fullmoney);
-		 * map.put("fulltime",fulltime); list.add(map); }
-		 */
-		return list;
+//		String accounts=selectuam.getAccounts();
+//		String countpage=this.powerFullMapper.selectFullMoneycount(accounts);
+		/*for (Map<String, Object> map : selectuam) {
+			Map<String,Object> map = new HashMap<String, Object>();
+			map.put("id", psFullmoneyLog.getId());
+			map.put("userid", psFullmoneyLog.getUserid());
+			map.put("accounts", psFullmoneyLog.getAccounts());
+			map.put("fullmoney", psFullmoneyLog.getFullmoney());
+			map.put("surplusmoney", psFullmoneyLog.getSurplusmoney());
+			map.put("fulltime", psFullmoneyLog.getFulltime());
+			list.add(map);
+		}*/
+		/*while (selectuam.next()) {
+			Map map = new HashMap<>();
+			String username = selectuam.getUsername();
+			String accounts = selectuam.getAccounts();
+			String surplusmoney = selectuam.getSurplusmoney();
+			String fullmoney = selectuam.getFullmoney();
+			String fulltime = selectuam.getFulltime();
+			map.put("username", username);
+			map.put("accounts", accounts);
+			map.put("surplusmoney", surplusmoney);
+			map.put("fullmoney", fullmoney);
+			map.put("fulltime", fulltime);
+			list.add(map);
+		}*/
+		 
+		return selectuam;
+	}
+
+
+	@Override
+	public PageBean<Map<String, Object>> pageQuery(int currentPage,int pageSize,String userToken) {
+		//封装PageBean
+        PageBean<Map<String, Object>> pb = new PageBean<Map<String, Object>>();
+        //设置当前页码
+        pb.setCurrentPage(currentPage);
+        //设置每页显示条数
+        pb.setPageSize(pageSize);
+        
+        //设置总记录数
+        int totalCount = powerFullMapper.findTotalCount(userToken);
+        pb.setTotalCount(totalCount);
+        //设置当前页显示的数据集合
+        int start = (currentPage - 1) * pageSize;//开始的记录数
+        
+        Map <String,Object> datamap=new HashMap<String,Object>();//把数据封装到map
+		datamap.put("userToken", userToken);
+		datamap.put("start", start);
+		datamap.put("pageSize", pageSize);
+        List<Map<String, Object>> list = powerFullMapper.findByPage(datamap);
+        pb.setList(list);
+
+        //设置总页数 = 总记录数/每页显示条数
+        int totalPage = totalCount % pageSize == 0 ? totalCount / pageSize :(totalCount / pageSize) + 1 ;
+        pb.setTotalPage(totalPage);
+		return pb;
 	}
 
 }

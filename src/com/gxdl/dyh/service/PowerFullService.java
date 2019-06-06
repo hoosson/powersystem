@@ -3,6 +3,9 @@ package com.gxdl.dyh.service;
 import java.util.List;
 import java.util.Map;
 
+import com.gxdl.dyh.po.PageBean;
+import com.gxdl.dyh.po.PsFullmoneyLog;
+
 import net.sf.json.JSONObject;
 
 public interface PowerFullService {
@@ -23,5 +26,10 @@ public interface PowerFullService {
 	/*
 	 * 查询0-4条数据返回界面
 	 */
-	public List<Map> selectFullMoneymsg(String userToken,Integer param);
+	public List<Map<String, Object>> selectFullMoneymsg(String userToken,Integer param);
+	
+	/**
+	 * 分页查询
+	 */
+	public PageBean<Map<String, Object>> pageQuery(int currentPage,int pageSize,String userToken);
 }

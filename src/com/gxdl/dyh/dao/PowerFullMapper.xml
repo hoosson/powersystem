@@ -43,8 +43,8 @@
 	</insert>
 	<!-- 查询0到4的数据-->
 	<!-- parameterType="java.lang.String,java.lang.Integer" -->
-	<select id="selectFullMoneylog" parameterType="java.util.Map"  resultType="com.gxdl.dyh.po.PsFullmoneyLog">
-	select a.* from ps_fullmoney_log a LEFT JOIN ps_userinfo b ON a.userid=b.userid where b.user_token=#{userToken} limit 0,#{currentPage}
+	<select id="selectFullMoneylog" parameterType="java.util.Map"  resultType="java.util.Map">
+	select a.*,b.* from ps_fullmoney_log a LEFT JOIN ps_userinfo b ON a.userid=b.userid where user_token = #{userToken} limit 0,4
 	</select>
 	<!-- <select id="selectFullMoneylog" parameterType="java.lang.String,java.lang.Integer" resultType="com.gxdl.dyh.po.SelectUserInfoandfullmoneylog">
 		SELECT t1.username,t1.accounts,t2.surplusmoney,t2.fullmoney,t2.fulltime FROM ps_userinfo t1 
@@ -53,5 +53,15 @@ JOIN(SELECT accounts,surplusmoney,fullmoney,fulltime FROM ps_fullmoney_log LIMIT
 	<!-- 查询条数 -->
 	<select id="selectFullMoneycount" parameterType="java.lang.String" resultType="java.lang.String">
 	SELECT COUNT(1) FROM ps_fullmoney_log WHERE accounts=#{accounts}
+	</select>
+	
+	<!-- userToken查询分页总条数 -->
+	<select id="findTotalCount" parameterType="java.lang.String" resultType="int">
+	select count(*) from ps_fullmoney_log a LEFT JOIN ps_userinfo b ON a.userid=b.userid where b.user_token = #{userToken}
+	</select>
+	
+	<!-- 分页查询 -->
+	<select id="findByPage" parameterType="java.util.Map"  resultType="java.util.Map">
+		select a.*,b.* from ps_fullmoney_log a LEFT JOIN ps_userinfo b ON a.userid=b.userid where user_token = #{userToken} limit #{start},#{pageSize}
 	</select>
 </mapper>

@@ -13,6 +13,8 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.gxdl.dyh.po.PageBean;
+import com.gxdl.dyh.po.PsFullmoneyLog;
 import com.gxdl.dyh.service.PowerFullService;
 
 @Controller
@@ -82,21 +84,45 @@ public class UserLoginPageController {
 	 * 跳转到用户的充值记录的页面
 	 */
 	@RequestMapping(value="/toFullMoneyLogPageJsp")
-	public ModelAndView toFullMoneyLogPageJsp(String userToken,ModelMap modelMap, Integer currentPage){
-		ModelAndView mav = new ModelAndView("main/fullMoney");
+	public ModelAndView toFullMoneyLogPageJsp(HttpServletRequest request, HttpServletResponse response, ModelMap modelMap){
+		ModelAndView mav = new ModelAndView();
+		//1.接收参数
+		String userToken = (String) request.getSession().getAttribute("userToken");
+		
+        String currentPageStr = request.getParameter("currentPage");
+        String pageSizeStr = request.getParameter("pageSize");
+        String cidStr = request.getParameter("cid");
+        
 		if(userToken != null && userToken.length() > 0){
-			modelMap.put("userToken", userToken);
+			//modelMap.put("userToken", userToken);
 			
-			List<Map> map = powerFullService.selectFullMoneymsg(userToken,1);
-			HashMap<Object, Object> currentPageMap = new HashMap<>();
-			currentPageMap.put("currentPage", "1");
-			map.add(currentPageMap);
+			int currentPage = 0;//当前页码，如果不传递，则默认为第一页
+	        if(currentPageStr != null && currentPageStr.length() > 0){
+	            currentPage = Integer.parseInt(currentPageStr);
+	        }else{
+	            currentPage = 1;
+	        }
+			
+	        int pageSize = 0;//每页显示条数，如果不传递，默认每页显示5条记录
+	        if(pageSizeStr != null && pageSizeStr.length() > 0){
+	            pageSize = Integer.parseInt(pageSizeStr);
+	        }else{
+	            pageSize = 5;
+	        }
+	        PageBean<Map<String, Object>> aBean = powerFullService.pageQuery(currentPage, pageSize,userToken);
+	        System.out.println(aBean);
+			
+//			List<Map<String,Object>> list = powerFullService.selectFullMoneymsg(userToken,1);
+//			HashMap<Object, Object> currentPageMap = new HashMap<>();
+			//currentPageMap.put("currentPage", "1");
+			//map.add(currentPageMap);
 			//request.getSession().setAttribute("data",map);
-			mav.addObject("data", map);
-			//mav.setViewName("main/fullMoney");
+			mav.addObject("data", aBean);
+			mav.setViewName("main/fullMoney");
 			
+		}else {
+			mav.setViewName("userlogin/login");
 		}
-		//return "main/fullMoney";
 		return mav;
 	}
 }

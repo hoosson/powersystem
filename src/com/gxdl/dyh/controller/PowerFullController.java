@@ -77,10 +77,10 @@ public class PowerFullController {
 		// TODO Auto-generated method stub
 		try {
 			if(userToken!=null) {
-				List<Map> map = powerFullService.selectFullMoneymsg(userToken,currentPage);
+				List<Map<String, Object>> map = powerFullService.selectFullMoneymsg(userToken,currentPage);
 				HashMap<Object, Object> currentPageMap = new HashMap<>();
-				currentPageMap.put("currentPage", "1");
-				map.add(currentPageMap);
+//				currentPageMap.put("currentPage", "1");
+//				map.add(currentPageMap);
 				request.getSession().setAttribute("data",map);
 				System.out.println(map.toString());
 			}

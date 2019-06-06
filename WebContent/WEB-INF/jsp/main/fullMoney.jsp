@@ -1,4 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,15 +23,13 @@
 	<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 	<script type="text/javascript">
 	var userToken = "${userToken}";
-
-	$(function(){
-		fulloneMassage(1);
-	})
+	
 	function fulloneMassage(currentPage){
-		//window.location.href="PowerFullController/selectFullMoneymsg.do?userToken="+userToken+"&currentPage"+currentPage;
+		window.location.href="PowerFullController/selectFullMoneymsg.do?currentPage="+currentPage;
 	}
-	function fullMassage(param) {
+	function fullMassage(currentPage) {
 		//不小于最小整数 总数除10总页数
+		/* var total = ${data.totalPage};
 		var pageTotal = Math.ceil(total/10);
 		if(param == 1){
 			currentPage = 1;
@@ -43,12 +43,12 @@
 			}
 		}else{
 			currentPage = pageTotal;
-		}
-		window.location.href="PowerFullController/selectFullMoneymsg.do?userToken="+userToken+"/currentPage"+currentPage;
+		} */
+		window.location.href="UserLoginPageController/toFullMoneyLogPageJsp.do?currentPage="+currentPage;
 	}
 	</script>
 	</head>
-	<body <!-- onload="fulloneMassage(1);" -->>
+	<body ><!-- onload="fulloneMassage(1);" -->
 		<div class="full_hard">----------------&emsp;查询充值记录&emsp;---------------</div>
 		<br />
 		<div class="condition_div">
@@ -65,37 +65,42 @@
 		<div class="table_wai">
 			<table class="table_class">
 				<tr>
-					<td style="text-align: center;width: 20px;background-color: mediumaquamarine;">序号</td>
-					<td style="text-align: center;width: 35px;background-color: mediumaquamarine;">用户姓名</td>
-					<td style="text-align: center;width: 50px;background-color: mediumaquamarine;">充值账户</td>
-					<td style="text-align: center;width: 30px;background-color: mediumaquamarine;">开户时间</td>
-					<td style="text-align: center;width: 20px;background-color: mediumaquamarine;">充值金额</td>
-					<td style="text-align: center;width: 30px;background-color: mediumaquamarine;">充值时间</td>
-					<td style="text-align: center;width: 20px;background-color: mediumaquamarine;">剩余金额</td>
-					<td style="text-align: center;width: 30px;background-color: mediumaquamarine;">上次查询时间</td>
+					<th style="text-align: center;width: 20px;background-color: mediumaquamarine;">序号</th>
+					<th style="text-align: center;width: 35px;background-color: mediumaquamarine;">用户姓名</th>
+					<th style="text-align: center;width: 50px;background-color: mediumaquamarine;">充值账户</th>
+					<th style="text-align: center;width: 20px;background-color: mediumaquamarine;">充值金额</th>
+					<th style="text-align: center;width: 30px;background-color: mediumaquamarine;">充值时间</th>
+					<th style="text-align: center;width: 20px;background-color: mediumaquamarine;">剩余金额</th>
+					<th style="text-align: center;width: 30px;background-color: mediumaquamarine;">上次查询时间</th>
 				</tr>
+				
+				<c:forEach items="${data.list}" var="key" varStatus="p">
+					<tr>
+						<td>${p.index+1}</td>
+						<td>${key.username}</td>
+						<td>${key.accounts}</td>
+						<td>${key.fullmoney}</td>
+						<td>${key.fulltime}</td>
+						<td>${key.surplusmoney}</td>
+						<td>${key.last_login_time}</td>
+					</tr>
+				</c:forEach>
 				<tr>
 					<td colspan="8" style="text-align: center;letter-spacing: 2px;">
+						当前第${data.currentPage}页&emsp;总共${data.totalPage}页&emsp;总共${data.totalCount}条记录&emsp;
 						<button class="button_paging" onclick="fullMassage(1);">首页</button>&emsp;
 						<button class="button_paging" onclick="fullMassage(2);">上一页</button>&emsp;
-						当前第x页&emsp;总共xx页&emsp;总共aa条记录&emsp;
 						跳转到第
 						<select>
 							<option>---1---</option>
+							<option>---2---</option>
+							<option>---3---</option>
+							<option>---4---</option>
 						</select>页
 						<button class="button_paging" onclick="fullMassage(3);">下一页</button>&emsp;
-						<button class="button_paging" onclick="fullMassage(4);">尾页</button>
+						<button class="button_paging" onclick="fullMassage(${data.totalPage});">尾页</button>
 					</td>
 				</tr>
-					<c:forEach var="key" items="${data}">
-						<tr>
-							<td>${key.bookName}</td>
-							<td>${key.bookAuthor}</td>
-							<td>${key.bookPrice}</td>
-							<td>${key.bookSimple}</td>
-							<td>${key.bookNumber}</td>
-						</tr>
-					</c:forEach>
 			</table>
 		</div>
 	</body>	
