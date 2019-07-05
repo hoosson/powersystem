@@ -125,4 +125,38 @@ public class UserLoginPageController {
 		}
 		return mav;
 	}
+	
+	/**
+	 * 跳转到用户的修改密码页面
+	 */
+	@RequestMapping(value="/toUpdatePwd")
+	public ModelAndView toUpdatePwd(HttpServletRequest request,ModelMap modelMap){
+		ModelAndView mav = new ModelAndView();
+		//1.接收参数
+		String userToken = (String) request.getSession().getAttribute("userToken");
+		if(userToken != null && userToken.length() > 0){
+			mav.setViewName("userlogin/updatePassword");
+			
+		}else {
+			mav.setViewName("userlogin/login");
+		}
+		return mav;
+	}
+	
+	/**
+	 * 跳转到用户的信息页面
+	 */
+	@RequestMapping(value="/userinfo")
+	public ModelAndView userInfo(HttpServletRequest request,ModelMap modelMap){
+		ModelAndView mav = new ModelAndView();
+		//1.接收参数
+		String userToken = (String) request.getSession().getAttribute("userToken");
+		if(userToken != null && userToken.length() > 0){
+			mav.setViewName("userlogin/userinfo");
+			
+		}else {
+			mav.setViewName("userlogin/login");
+		}
+		return mav;
+	}
 }

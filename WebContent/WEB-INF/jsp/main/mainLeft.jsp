@@ -28,27 +28,27 @@
 			<a id="fullMoneyLogId" onclick="toInstantFullLogPageJsp();" target="right">
 				<li >充值记录</li>
 			</a>
-			<a href="watches.html" target="right">
-				<li >剩余电量</li>
+			<a href="surplus/surplusInfo.do" target="right">
+				<li >余量信息</li>
 			</a>
-			<a href="watches.html" target="right">
-				<li >剩余金额</li>
-			</a>
-			<a href="watches.html" target="right">
+			<a href="year/yearBill.do" target="right">
 				<li >年度账单</li>
 			</a>
-			<a href="watches.html" target="right">
+			<a href="useAna/useAnalysis.do" target="right">
 				<li >用电分析</li>
 			</a>
-			<a href="watches.html" target="right">
+			<a href="warnning/warnningSetting.do" target="right">
 				<li >告警设置</li>
 			</a>
-			<a href="watches.html" target="right">
+			<a href="UserLoginPageController/userinfo.do" target="right">
+				<li >用户信息</li>
+			</a>
+			<a href="UserLoginPageController/toUpdatePwd.do" target="right">
 				<li >修改密码</li>
 			</a>
-			<a href="watches.html" target="right">
+			<!-- <a href="watches.html" target="right">
 				<li >退出登录</li>
-			</a>
+			</a> -->
 		</div>
 	</body>
 </html>

@@ -5,6 +5,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <base href="${pageContext.request.scheme }://${pageContext.request.serverName }:${pageContext.request.serverPort }${pageContext.request.contextPath }/">
 		<title>PowerSystem-主页</title>
+		<link rel="shortcut icon" href="images/favicon.ico" /><!-- 网站图标 -->
 		<link rel="stylesheet" type="text/css" href="css/mainPage.css"/>
 		<script type="text/javascript" src="js/jquery-1.8.3.min.js"></script>
 		<script type="text/javascript">
